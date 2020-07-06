@@ -1,0 +1,10 @@
+<div class="card">
+  <h5 class="card-header">Bienvenido al Foro del Instituo de Física y Astronomía</h5>
+  <div class="card-body">
+    <p class="card-text">explicación breve en que consiste</p>
+    {{#if user}}
+    {{else}}
+    <a href="/users/signup" class="btn btn-primary">Empecemos!</a>
+    {{/if}}
+  </div>
+</div>

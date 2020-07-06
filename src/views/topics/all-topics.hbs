@@ -1,0 +1,39 @@
+<div class="row">
+    {{#each topics}}
+        <div class="col-md-3 p-2">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title d-flex bd-highlight align-items-center">
+                       <div id="mydivheader" class="p-2 flex-grow-1 bd-highlight align-center">{{title}}</div> {{#if ../cond}} <div class="p-2 bd-highlight">  <a href="/topics/edit/{{_id}}"><i class="fas fa-edit"></i></a>  </div>
+                       <div class="p-2 bd-highlight"> 
+                       <form action="/topics/delete/{{_id}}?_method=DELETE" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
+                       {{/if}}
+                       </div>
+                    </h4>
+                    <p class="align-center"> {{description}}</p>
+                    <a href="/foro/{{_id}}" class="btn btn-success btn-block btn"> Participar</a>
+                </div>
+            </div>
+        </div> 
+    {{else}}
+        <div class="card mx-auto">
+            <div class="card-body">
+                <h1> Hola {{user}}</h1>
+                <p class="lead">No hay temas de discución todavía.</p>
+                {{#if cond}}
+                <a href="/topics/add" class="btn btn-success btn-block">Crea una!</a>
+                {{/if}}
+            </div>
+        </div>
+
+    {{/each}}
+</div>
+
+<script>
+    
+</script>

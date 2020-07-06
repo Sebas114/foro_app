@@ -1,0 +1,76 @@
+
+<div class="card mx-auto ">
+    <div class="card-body">
+        <h4 class="card-title  align-center">
+            <div id="mydivheader" class="align-center d-flex justify-content-center" >{{topic.title}}</div> 
+        </h4>
+        <p class="align-center d-flex justify-content-center"> {{topic.description}}</p>
+
+    </div>
+</div>
+
+<div class="card">
+    <form action="/foro/new-comment/{{topic._id}}/{{topic._id}}" method="POST">
+        <div class="form-group">
+            <textarea name="comentario"  class="form-control" placeholder="Ingrese un comentario" ></textarea>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-outline-secondary btn-success" type="submit">Comentar</button>
+        </div>
+    </form>
+</div>
+
+<div class="row p-3">
+    {{#each sub_comment}}
+    <div class="card mx-auto ">
+        <div class="card-header">
+            <div class="card ">
+                <div class="card-header">
+                    <div class="mx-auto"> <i class="fas fa-user"></i> <b> Anonimo {{pri_comment.user}} </b> 
+                        <form action="/comment/delete/{{../topic._id}}/{{pri_comment._id}}?_method=DELETE" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
+                    </div> 
+                </div>
+                <div class="card-body">
+                    <p >{{pri_comment.comentario}}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card-body">
+            {{#each sec_comment}}
+            <div class="card ">
+                <div class="card-header">
+                    <div class="mx-auto"> <i class="fas fa-user"></i> <b> Anonimo {{user}} </b>
+                    <form action="/comment/delete/{{../../topic._id}}/{{_id}}?_method=DELETE" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                    </form>
+                    </div> 
+                </div>
+                <div class="card-body">
+                    <p >{{comentario}}</p>
+                </div>
+            </div>
+            {{/each}}
+            <div class="card">
+                <form action="/foro/new-comment/{{../topic._id}}/{{pri_comment._id}}" method="POST">
+                    <div class="form-group">
+                        <textarea name="comentario"  class="form-control" placeholder="Ingrese un comentario" ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-outline-secondary btn-success" type="submit">Comentar</button>
+                    </div>
+                </form>
+            </div>
+        </div> 
+        
+    </div>
+    {{/each}}
+</div>
