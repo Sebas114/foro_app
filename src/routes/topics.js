@@ -33,9 +33,8 @@ router.post('/topics/new-topic', isAuthenticated, async(req, res) => {
 
 router.get('/topics', isAuthenticated, async(req, res) => {
 
-    const topics = await Topic.find().sort({ date: 'desc' }).lean();
-    if (req.user.rol == 'administrador') { cond = true } else { cond = false };
-    res.render('topics/all-topics', { topics, cond });
+    const topics = await Topic.find().sort({ date: 'desc' });
+    res.render('topics/all-topics', { topics });
 
 });
 
