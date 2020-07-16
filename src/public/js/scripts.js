@@ -3,12 +3,21 @@ $('[id=btn-like]').click(function(e) {
     let comment_id = $(this).data('id');
     $.post('/comment/like/' + comment_id)
         .done(data => {
+            console.log(data.dislikes);
+            if (data.dislikes != undefined) {
+                $('[id=dislikes]').each((index, element) => {
+                    let id = element.dataset.id;
+                    if (id === comment_id) {
+                        element.textContent = data.dislikes
+                    }
+                })
+            };
             $('[id=likes]').each((index, element) => {
                 let id = element.dataset.id;
                 if (id === comment_id) {
                     element.textContent = data.likes
-                }
-            })
+                };
+            });
 
         });
 });
@@ -17,6 +26,14 @@ $('[id=btn-dislike]').click(function(e) {
     let comment_id = $(this).data('id');
     $.post('/comment/dislike/' + comment_id)
         .done(data => {
+            if (data.likes != undefined) {
+                $('[id=likes]').each((index, element) => {
+                    let id = element.dataset.id;
+                    if (id === comment_id) {
+                        element.textContent = data.likes
+                    }
+                })
+            };
             $('[id=dislikes]').each((index, element) => {
                 let id = element.dataset.id;
                 if (id === comment_id) {

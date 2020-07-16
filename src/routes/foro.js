@@ -60,27 +60,38 @@ router.post('/comment/like/:comment_id', isAuthenticated, async(req, res) => {
     const topic = await Topic.findById(req.params.comment_id);
     if (comment) {
         const user = comment.likes.user_id;
+        const cond2 = comment.dislikes.user_id.indexOf(req.user.id);
         const condition = user.indexOf(req.user.id);
         if (condition == -1) {
+            if (cond2 != -1) {
+                comment.dislikes.number = comment.dislikes.number - 1;
+                comment.dislikes.user_id.splice(cond2, 1);
+            }
             user.push(req.user.id);
             comment.likes.number = comment.likes.number + 1;
             await comment.save();
-            res.json({ likes: comment.likes.number });
+            res.json({ likes: comment.likes.number, dislikes: comment.dislikes.number });
         } else {
             user.splice(condition, 1);
             comment.likes.number = comment.likes.number - 1;
             await comment.save();
             res.json({ likes: comment.likes.number });
         }
+
     }
     if (topic) {
         const user = topic.likes.user_id;
+        const cond2 = topic.dislikes.user_id.indexOf(req.user.id);
         const condition = user.indexOf(req.user.id);
         if (condition == -1) {
+            if (cond2 != -1) {
+                topic.dislikes.number = topic.dislikes.number - 1;
+                topic.dislikes.user_id.splice(cond2, 1);
+            }
             user.push(req.user.id);
             topic.likes.number = topic.likes.number + 1;
             await topic.save();
-            res.json({ likes: topic.likes.number });
+            res.json({ likes: topic.likes.number, dislikes: topic.dislikes.number });
         } else {
             user.splice(condition, 1);
             topic.likes.number = topic.likes.number - 1;
@@ -98,12 +109,17 @@ router.post('/comment/dislike/:comment_id', isAuthenticated, async(req, res) => 
     const topic = await Topic.findById(req.params.comment_id);
     if (comment) {
         const user = comment.dislikes.user_id;
+        const cond2 = comment.likes.user_id.indexOf(req.user.id);
         const condition = user.indexOf(req.user.id);
         if (condition == -1) {
+            if (cond2 != -1) {
+                comment.likes.number = comment.likes.number - 1;
+                comment.likes.user_id.splice(cond2, 1);
+            }
             user.push(req.user.id);
             comment.dislikes.number = comment.dislikes.number + 1;
             await comment.save();
-            res.json({ dislikes: comment.dislikes.number });
+            res.json({ likes: comment.likes.number, dislikes: comment.dislikes.number });
         } else {
             user.splice(condition, 1);
             comment.dislikes.number = comment.dislikes.number - 1;
@@ -113,12 +129,17 @@ router.post('/comment/dislike/:comment_id', isAuthenticated, async(req, res) => 
     }
     if (topic) {
         const user = topic.dislikes.user_id;
+        const cond2 = topic.likes.user_id.indexOf(req.user.id);
         const condition = user.indexOf(req.user.id);
         if (condition == -1) {
+            if (cond2 != -1) {
+                topic.likes.number = topic.likes.number - 1;
+                topic.likes.user_id.splice(cond2, 1);
+            }
             user.push(req.user.id);
             topic.dislikes.number = topic.dislikes.number + 1;
             await topic.save();
-            res.json({ dislikes: topic.dislikes.number });
+            res.json({ likes: topic.likes.number, dislikes: topic.dislikes.number });
         } else {
             user.splice(condition, 1);
             topic.dislikes.number = topic.dislikes.number - 1;
