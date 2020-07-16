@@ -13,9 +13,9 @@ router.post('/topics/new-topic', isAuthenticated, async(req, res) => {
     if (!title) {
         errors.push({ text: 'Porfavor escriba un titulo' });
     }
-    if (!description) {
-        errors.push({ text: 'Porfavor escriba una descripción' });
-    }
+    // if (!description) {
+    //     errors.push({ text: 'Porfavor escriba una descripción' });
+    // }
     if (errors.length > 0) {
         res.render('topics/new-topic', {
             errors,

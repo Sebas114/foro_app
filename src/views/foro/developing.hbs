@@ -10,7 +10,7 @@
         <div class="card-footer">
             <div class="d-flex  align-items-center bd-highlight">
                 <div class="p-2 mr-auto bd-highlight">
-                    <span id="likes" data-id="{{topic._id}}">{{topic.likes}}</span>
+                    <span id="likes" data-id="{{topic._id}}">{{topic.likes.number}}</span>
                     <button class="btn btn-light" id="btn-like" data-id="{{topic._id}}">
                         <i class="fas fa-thumbs-up"></i>
                     </button>
@@ -18,7 +18,7 @@
 
                 </div>
                 <div class="p-2 mr-auto bd-highlight ">
-                    <span id="dislikes" data-id="{{topic._id}}">{{topic.dislikes}}</span>
+                    <span id="dislikes" data-id="{{topic._id}}">{{topic.dislikes.number}}</span>
                     <button class="btn btn-light" id="btn-dislike" data-id="{{topic._id}}">
                         <i class="fas fa-thumbs-down "></i>
                     </button>
@@ -95,7 +95,7 @@
             <div class="card-footer">
                 <div class="d-flex  align-items-center bd-highlight">
                     <div class="p-2 mr-auto bd-highlight">
-                        <span id="likes" data-id="{{pri_comment._id}}">{{pri_comment.likes}}</span>
+                        <span id="likes" data-id="{{pri_comment._id}}">{{pri_comment.likes.number}}</span>
                         <button class="btn btn-light" id="btn-like" data-id="{{pri_comment._id}}"
                             data-topic="{{../topic._id}}">
                             <i class="fas fa-thumbs-up"></i>
@@ -104,7 +104,7 @@
 
                     </div>
                     <div class="p-2 mr-auto bd-highlight ">
-                        <span id="dislikes" data-id="{{pri_comment._id}}">{{pri_comment.dislikes}}</span>
+                        <span id="dislikes" data-id="{{pri_comment._id}}">{{pri_comment.dislikes.number}}</span>
                         <button class="btn btn-light" id="btn-dislike" data-id="{{pri_comment._id}}"
                             data-topic="{{../topic._id}}">
                             <i class="fas fa-thumbs-down "></i>
@@ -169,14 +169,14 @@
                     <div class="card-footer">
                         <div class="d-flex  align-items-center bd-highlight">
                             <div class="p-2 mr-auto bd-highlight">
-                                <span id="likes" data-id="{{_id}}">{{likes}}</span>
+                                <span id="likes" data-id="{{_id}}">{{likes.number}}</span>
                                 <button class="btn btn-light" id="btn-like" data-id="{{_id}}"
                                     data-topic="{{../../topic._id}}">
                                     <i class="fas fa-thumbs-up"></i>
                                 </button>
                             </div>
                             <div class="p-2 mr-auto bd-highlight ">
-                                <span id="dislikes" data-id="{{_id}}">{{dislikes}}</span>
+                                <span id="dislikes" data-id="{{_id}}">{{dislikes.number}}</span>
                                 <button class="btn btn-light" id="btn-dislike" data-id="{{_id}}"
                                     data-topic="{{../../topic._id}}">
                                     <i class="fas fa-thumbs-down "></i>

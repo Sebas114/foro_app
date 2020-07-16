@@ -59,14 +59,34 @@ router.post('/comment/like/:comment_id', isAuthenticated, async(req, res) => {
     const comment = await Comment.findById(req.params.comment_id);
     const topic = await Topic.findById(req.params.comment_id);
     if (comment) {
-        comment.likes = comment.likes + 1;
-        await comment.save();
-        res.json({ likes: comment.likes });
+        const user = comment.likes.user_id;
+        const condition = user.indexOf(req.user.id);
+        if (condition == -1) {
+            user.push(req.user.id);
+            comment.likes.number = comment.likes.number + 1;
+            await comment.save();
+            res.json({ likes: comment.likes.number });
+        } else {
+            user.splice(condition, 1);
+            comment.likes.number = comment.likes.number - 1;
+            await comment.save();
+            res.json({ likes: comment.likes.number });
+        }
     }
     if (topic) {
-        topic.likes = topic.likes + 1;
-        await topic.save();
-        res.json({ likes: topic.likes });
+        const user = topic.likes.user_id;
+        const condition = user.indexOf(req.user.id);
+        if (condition == -1) {
+            user.push(req.user.id);
+            topic.likes.number = topic.likes.number + 1;
+            await topic.save();
+            res.json({ likes: topic.likes.number });
+        } else {
+            user.splice(condition, 1);
+            topic.likes.number = topic.likes.number - 1;
+            await topic.save();
+            res.json({ likes: topic.likes.number });
+        }
 
     } else {
         res.status(500).json({ error: 'Internal Error' });
@@ -77,14 +97,34 @@ router.post('/comment/dislike/:comment_id', isAuthenticated, async(req, res) => 
     const comment = await Comment.findById(req.params.comment_id);
     const topic = await Topic.findById(req.params.comment_id);
     if (comment) {
-        comment.dislikes = comment.dislikes + 1;
-        await comment.save();
-        res.json({ dislikes: comment.dislikes });
+        const user = comment.dislikes.user_id;
+        const condition = user.indexOf(req.user.id);
+        if (condition == -1) {
+            user.push(req.user.id);
+            comment.dislikes.number = comment.dislikes.number + 1;
+            await comment.save();
+            res.json({ dislikes: comment.dislikes.number });
+        } else {
+            user.splice(condition, 1);
+            comment.dislikes.number = comment.dislikes.number - 1;
+            await comment.save();
+            res.json({ dislikes: comment.dislikes.number });
+        }
     }
     if (topic) {
-        topic.dislikes = topic.dislikes + 1;
-        await topic.save();
-        res.json({ dislikes: topic.dislikes });
+        const user = topic.dislikes.user_id;
+        const condition = user.indexOf(req.user.id);
+        if (condition == -1) {
+            user.push(req.user.id);
+            topic.dislikes.number = topic.dislikes.number + 1;
+            await topic.save();
+            res.json({ dislikes: topic.dislikes.number });
+        } else {
+            user.splice(condition, 1);
+            topic.dislikes.number = topic.dislikes.number - 1;
+            await topic.save();
+            res.json({ dislikes: topic.dislikes.number });
+        }
 
     } else {
         res.status(500).json({ error: 'Internal Error' });
